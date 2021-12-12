@@ -12,7 +12,7 @@
     color: #363636;
 }
 
-.summary {
+.summary1 {
     width: 10rem;
     display: flex;
     justify-content: space-between;
@@ -35,6 +35,9 @@
 .actions {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
 }
 
 @media (min-width: 768px) {

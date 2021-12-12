@@ -7,7 +7,7 @@ const CartItem = (props) => {
         <li className='cart-item'>
             <div>
                 <h2>{props.name}</h2>
-                <div className="summary">
+                <div className="summary1">
                     <span className="price">{price}</span>
                     <span className="amount">x {props.amount}</span>
                 </div>
