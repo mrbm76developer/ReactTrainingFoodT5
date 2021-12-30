@@ -25,9 +25,9 @@ const Checkout = (props) => {
 
         const enteredNameValid = !isEmpty(nameEntered);
         const enteredStreetValid = !isEmpty(streetEntered);
-        const enteredPostalValid = !isEmpty(postalEntered);
-        const enteredCityValid = notFiveChars(cityEntered);
-
+        const enteredCityValid = !isEmpty(postalEntered);
+        const enteredPostalValid = !notFiveChars(cityEntered);
+        console.log(enteredNameValid,enteredStreetValid,enteredCityValid,enteredPostalValid)
         setIsFormInputValidity({
             name: enteredNameValid,
             street: enteredStreetValid,
@@ -35,7 +35,27 @@ const Checkout = (props) => {
             city: enteredCityValid,
         });
 
-    }
+        console.log(isFormInputValidity)
+        const formIsValid = enteredNameValid &&
+            enteredStreetValid &&
+            enteredPostalValid &&
+            enteredCityValid;
+        console.log(formIsValid)
+        if (!formIsValid) {
+            return;
+        }
+        nameInputRef.current.value ='';
+        streetInputRef.current.value ='';
+        postalInputRef.current.value ='';
+        cityInputRef.current.value ='';
+
+        props.onConfirm({
+            name: nameEntered,
+            street: streetEntered,
+            postalCode: postalEntered,
+            city: cityEntered
+        });
+    };
     return (
         <form onSubmit={submitHandler} className='form1'>
             <div className={`${'control1'} ${isFormInputValidity.name ? '' : 'invalid1'} `}>
@@ -53,7 +73,7 @@ const Checkout = (props) => {
                 <input type="text" id='postal' placeholder='Postal Code' ref={postalInputRef}/>
                 {!isFormInputValidity.postalCode && <p>Please Entered Postal Code</p>}
             </div>
-            <div className={'control1' + (isFormInputValidity.city ? '' : ' invalid1')}>
+            <div className={`${'control1'} ${isFormInputValidity.city ? '' : ' invalid1'}`}>
                 <label htmlFor="city">City</label>
                 <input type="text" id='city' placeholder='City' ref={cityInputRef}/>
                 {!isFormInputValidity.city && <p>Please Entered City</p>}
